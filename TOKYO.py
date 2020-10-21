@@ -14,10 +14,18 @@ productlinks = []
 for x in range(1, 3):
     r = requests.get(f'https://tabelog.com/tokyo/rstLst/cond58-00-00/{x}/?LstSmoking=0&svd=20201013&svt=1900&svps=2')
 
+    # get the first page's URL (page number 1) and identify the location of page number in URL and change the page
+    # number as {x} . Because we are going to get all information from all pages using for loop.
+
+
+
     soup = BeautifulSoup(r.content, 'lxml')
 
-    productlist = soup.find_all('h4', class_='list-rst__rst-name')
+    # use pip install lxml
 
+    productlist = soup.find_all('h4', class_='list-rst__rst-name')
+       # identify the common element cass name. Normally in website, every product is a object of one class/
+       # identify that class name with its tag name.
 
     for item in productlist:
         for link in item.find_all('a', href=True):
